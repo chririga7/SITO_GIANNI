@@ -1,0 +1,380 @@
+PROGETTO: sito statico per barber shop "A PUTIA DEL BARBEE"
+
+PERCORSO PROGETTO:
+C:\Users\christian.riga\OneDrive - Archiva Group\Desktop\Claude\Siti\Sito_Gianni
+
+OBIETTIVO:
+Landing page statica responsive per browser e mobile, con stile verde coerente col negozio, CTA WhatsApp, mappa, social e pagine base privacy/cookie. La direzione grafica approvata e' elegante, pulita e molto visiva.
+
+FILE PRINCIPALI:
+- index.html
+- styles.css
+- script.js
+- privacy.html
+- cookies.html
+- assets\Logo.jpg
+- assets\Logo-transparent.png
+- assets\Screenshot_1.jpg
+- assets\Screenshot_1-2x.jpg
+- assets\Screenshot_2.jpg
+
+STATO ATTUALE DEL SITO:
+- Nome usato ovunque in forma corretta e tutta maiuscola: A PUTIA DEL BARBEE
+- Il logo nell'header ora usa assets\Logo-transparent.png
+- Il logo e' piu' grande, senza sfondo visibile, integrato con lo sfondo della pagina
+- Da mobile il logo e' stato spostato leggermente a sinistra per risultare piu' coerente col layout
+- Hero semplificata: rimosso il blocco destro con stato negozio/logo/card
+- Rimossa la scritta "Nuova apertura a Monza" dalla hero
+- Rimossi i pill orari in alto nella hero
+- Testi hero aggiornati e ripuliti dai riferimenti superflui alla prenotazione via chat
+- Titolo hero accorciato a "Uno spazio green dal carattere deciso." per entrare nel viewport al primo caricamento
+- Font h1 ridotto (max-width 16ch, font-size clamp 3rem-5rem) per bilanciare desktop e mobile
+- CTA WhatsApp presente
+- La vecchia sezione "Ambiente" e' stata rimossa
+- La sezione "Il negozio" ora usa Screenshot_1.jpg come area fotografica principale
+- Per il desktop e' stata creata anche una variante assets\Screenshot_1-2x.jpg per migliorare la resa visiva
+- La sezione "Il negozio" e' stata trasformata in un blocco piu' cinematografico con logica coerente tra desktop e mobile
+- La sezione "Il negozio" usa un blocco immagine dedicato invece di una foto stirata sull'intera area
+- Il terzo box della sezione "Il negozio" non parla piu' di contatto immediato ma di "Esperienza di barberia"
+- La sezione orari contiene solo la lista orari
+- Il giorno corrente viene evidenziato automaticamente tramite script
+- Il badge "Oggi" e' affianco al nome del giorno sia da desktop che da mobile, senza disallineare gli orari
+- Su mobile il badge e' nascosto (width:0) per i giorni non correnti, e mostrato inline solo per il giorno corrente
+- I titoli "I NOSTRI ORARI" e "CONTATTI" sono stati portati a uno stile piccolo/uppercase/oro coerente con "SOCIAL"
+- Il titolo della sezione Social e' stato corretto a livello di line-height per evitare che la A accentata tocchi la riga sopra
+- La sezione contatti ha titolo solo "Contatti"
+- Nei contatti i titoli "Dove siamo:", "Per info o prenotazioni, chiamaci:" e "Oppure contattaci via WhatsApp:" hanno lo stesso stile
+- Il bottone WhatsApp nella sezione contatti ora dice "Chat"
+- Indirizzo aggiornato in: Via Sant'Albino 16, 20900, Monza (MB)
+- Sezione contatti con mini mappa Google Maps ancora presente
+- Bottone "Apri su Google Maps" rimosso dai contatti
+- Sezione social con Instagram e TikTok presente
+- Footer con link Privacy e Cookie
+
+MIGLIORAMENTI APPLICATI (sessione Claude Code 2026-03-25):
+- Aggiunto favicon (link rel="icon" e apple-touch-icon) che punta a assets/Logo-transparent.png
+- Aggiunti meta tag Open Graph e Twitter Card per anteprime social (og:title, og:description, og:image, twitter:card ecc.)
+- SVG WhatsApp deduplicata: definita una sola volta con <symbol id="icon-whatsapp"> e riusata con <use href> in tutti e 3 i punti
+- Rimosso codice morto da script.js: variabili shopStatus/shopStatusNote, funzioni updateShopStatus/getNextOpening/dayLabel che referenziavano elementi non presenti nel DOM
+- Aggiunto role="img" e aria-label descrittivo alla sezione .intro-visual per accessibilita' (la foto e' background-image CSS)
+- Aggiunto cookie consent banner GDPR con accetta/rifiuta: se l'utente rifiuta, l'iframe Google Maps viene rimosso; il consenso e' salvato in localStorage
+- Stili del cookie banner integrati in styles.css con layout responsive
+- Logica cookie banner integrata in script.js (IIFE autoeseguente)
+- Aggiunto rel="noopener noreferrer" a tutti i link esterni (prima c'era solo noreferrer)
+- URL Google Maps embed ripulito con encoding corretto del query parameter
+- Badge "Oggi" negli orari: su mobile nascosto (width:0) per i giorni non correnti, mostrato inline affianco al giorno corrente senza disallineare
+- Animazioni di ingresso (fade-in/slide-up) su tutte le sezioni con Intersection Observer, con delay sfalsati sugli elementi secondari
+- Animazione titolo hero: h1, lead e CTA appaiono in sequenza al caricamento con fadeIn + translateY
+- Scroll indicator animato (chevron dorato con bounce) sotto la hero per invitare allo scroll
+- Bottone WhatsApp floating fisso in basso a destra, sempre visibile durante lo scroll, con effetto hover scale
+- Parallax leggero sulla hero: il gradiente di sfondo si muove con lo scroll tramite custom property CSS
+- Hover dinamici migliorati: glow verde sulle card, bordo dorato al passaggio, icone social con sfondo evidenziato
+- Pagina Privacy (privacy.html) riscritta con contenuti conformi GDPR: titolare, tipologie dati, finalita', base giuridica, servizi terze parti, trasferimento dati extra-UE, diritti utente, link al Garante
+- Pagina Cookie (cookies.html) riscritta con contenuti conformi al Provvedimento Garante 2021: tabella cookie tecnici, cookie terze parti (Google Maps, Google Fonts), gestione consenso, istruzioni disabilitazione browser, riferimenti normativi
+- Stili pagine legali: titoli h2/h3/h4 ridimensionati, tabella con allineamento corretto e wrapper scrollabile su mobile
+- Aggiunto favicon anche alle pagine privacy e cookies
+
+NOTA SULLE PAGINE LEGALI:
+- Le pagine privacy e cookie coprono i requisiti standard per un sito vetrina italiano
+- Prima della pubblicazione, completare con: P.IVA e dati fiscali del titolare (se applicabile)
+- Per conformita' legale piena, consigliata revisione da parte di un professionista legale
+
+NOTA IMPORTANTE SULLE FOTO:
+- In passato si e' provato a rimuovere l'omino/icona in basso a sinistra dalle foto, ma il risultato non era soddisfacente
+- Le foto originali sono state mantenute
+- Il sito usa:
+  - assets\Screenshot_1.jpg
+  - assets\Screenshot_1-2x.jpg
+  - assets\Screenshot_2.jpg
+- Backup disponibili:
+  - assets\Screenshot_1.original-backup.jpg
+  - assets\Screenshot_2.original-backup.jpg
+- File clean presenti ma da NON usare salvo nuova decisione:
+  - assets\Screenshot_1-clean.jpg
+  - assets\Screenshot_2-clean.jpg
+
+AGGIORNAMENTO SESSIONE 2026-04-03:
+- Il cliente ha fornito foto HD professionali (Samy Click Photography):
+  - 16 foto negozio in assets\Immagini_HD\Negozio\
+  - 13 foto prodotti singoli + 1 listino prodotti in assets\Immagini_HD\Prodotti\
+- La foto principale della sezione "Il negozio" e' stata sostituita con una foto HD panoramica del negozio
+  - Nuova foto: assets\negozio-hero.jpg (copiata da "WhatsApp Image 2026-04-03 at 14.23.26 (4).jpeg")
+  - Mostra: poltrona verde, specchio con LED, barber pole, divano attesa nero
+  - CSS aggiornato sia desktop che mobile per puntare alla nuova foto
+  - Rimossa la logica image-set 1x/2x (non piu' necessaria con foto HD)
+- Meta tag og:image e twitter:image aggiornati a assets/negozio-hero.jpg
+- Logo: si e' tentata l'estrazione HD dal listino prezzi ma il risultato non era soddisfacente
+  - Il logo resta assets\Logo-transparent.png (invariato)
+  - Se il cliente puo' fornire il file originale del logo (PNG/SVG dal grafico) sarebbe ideale
+- Le vecchie foto Screenshot_1.jpg, Screenshot_1-2x.jpg, Screenshot_2.jpg restano nel folder assets come archivio
+
+FOTO HD DISPONIBILI PER USI FUTURI:
+- Prodotti a marchio proprio (13 foto singole con nomi descrittivi):
+  Balsamo_cheratina, Cera_antiage, Crema_attiva_ricci, Dopobarba, Gel_capelli,
+  Glossy_lucida, Matte_opaca, Olio_da_barba, Polvere_volumizzante, Profumo_per_capelli,
+  Shampoo_antigiallo, Shampoo_capelli, Spray_al_sale_marino
+- Listino prezzi prodotti con tutti i prezzi (WhatsApp Image 2026-04-03 at 14.25.31.jpeg)
+- Listino prezzi servizi (WhatsApp Image 2026-04-03 at 14.27.06.jpeg):
+  Taglio completo e shampoo 20E, Taglio bambino fino 13 anni 15E, Taglio bambino fino 6 anni 10E,
+  Rinfrescata settimanale 15E, Taglio + barba 35E, Barba rituale 20E, Rifinitura barba 15E,
+  Rasatura barba 10E, Trattamento lisciante 20E, Sopracciglia 5E, Shampoo specifico 3E
+- Listino prezzi prodotti:
+  Gel capelli 16E, Cera lucida 16E, Polvere per capelli 16E, Cera opaca 18E,
+  Shampoo anti giallo 22E, Spray al sale 22E, Shampoo uso frequente 22E,
+  Crema ricci 22E, Olio barba 22E, Dopo barba 22E, Lacca 28E,
+  Cera anti age 20E, Profumo per capelli 20E
+- Foto negozio: postazioni barbiere, reception, zona lavaggio, area attesa, scaffale prodotti, vetrina orari
+
+AGGIORNAMENTO SESSIONE 2026-04-08:
+- Verificata resa sito desktop e mobile: tutto ok (foto HD, badge Oggi, cookie banner, WhatsApp floating)
+- Aggiunta sezione SERVIZI (listino prezzi) dopo "Negozio" e prima di "Orari":
+  - 11 card con nome servizio e prezzo in oro (griglia 3 col desktop, 2 tablet, 1 mobile)
+  - Servizi: Taglio completo 20E, Taglio+barba 35E, Barba rituale 20E, Rifinitura barba 15E,
+    Rasatura barba 10E, Rinfrescata settimanale 15E, Taglio bambino 13 anni 15E,
+    Taglio bambino 6 anni 10E, Trattamento lisciante 20E, Sopracciglia 5E, Shampoo specifico 3E
+- Aggiunta sezione PRODOTTI dopo "Servizi":
+  - 14 card con foto HD prodotto + prezzo (griglia 4 col desktop, 3 tablet, 2 mobile)
+  - Catalogo COMPLETO: tutti i prodotti con foto e prezzo
+  - Foto da assets\Immagini_HD\Prodotti\ con lazy loading
+  - Effetto zoom hover sulle foto
+- Gallery integrata nella sezione NEGOZIO:
+  - 15 foto (hero + 14 gallery) che ciclano con crossfade automatico ogni 4 secondi
+  - Foto rinominate in assets\gallery-01.jpg ... gallery-14.jpg (copiate da Immagini_HD\Negozio)
+  - CSS: ::before sostituito con div .intro-slide posizionati assolutamente, transizione opacity 1.2s
+  - JS: setInterval cicla la classe .is-active tra gli slide
+- Titoli sezioni uniformati: "Negozio", "Servizi", "Prodotti", "Orari", "Contatti"
+- Struttura pagina attuale: Hero > Negozio (con crossfade) > Servizi > Prodotti > Orari > Contatti > Social > Footer
+- Rimossa gallery-07.jpg dal crossfade (foto vetrina orari, non adatta)
+- Testo box "Identita' riconoscibile" allungato per allineare i 3 box a 3 righe ciascuno
+- Aggiunta riga metodi di pagamento nel footer:
+  - Loghi SVG ufficiali: Visa (con sfondo blu), Mastercard (solo cerchi, no sfondo), Maestro (solo cerchi, no sfondo), Satispay (logo S rossa ufficiale)
+  - Stile coerente col tema scuro: Mastercard/Maestro/Satispay senza sfondo, Visa con sfondo blu scuro
+  - I contanti non sono stati inclusi (nessun logo standard riconoscibile)
+  - Quando il cliente confermera' i circuiti accettati dal POS, aggiornare i loghi di conseguenza
+
+PROBLEMA LOGO:
+- Il logo attuale (assets\Logo-transparent.png) e' sgranato / bassa risoluzione
+- Serve il file originale dal grafico (PNG ad alta risoluzione o meglio SVG)
+- Chiedere al cliente di farsi mandare il file dal grafico che ha creato il logo
+
+DA CHIEDERE AL CLIENTE:
+1. **FILE ORIGINALE DEL LOGO** (priorita' alta) — il logo attuale e' sgranato. Serve il file originale PNG HD o SVG dal grafico
+2. Nome del brand / linea prodotti — se i prodotti hanno un marchio proprio
+3. ~~Descrizioni prodotto~~ — COMPLETATO (sessione 2026-04-11, didascalie integrate con expand/collapse)
+4. Conferma circuiti POS accettati (Visa, Mastercard, Maestro, altri?)
+
+- Aggiunta sezione RECENSIONI:
+  - Intestazione "5.0 ★★★★★ su Google"
+  - Tutte 5 stelle, tutte reali da Google Reviews
+
+AGGIORNAMENTO SESSIONE 2026-04-09:
+- Sezione recensioni ampliata a 16 recensioni totali:
+  - 3 visibili in griglia orizzontale: Alberto Bonivento, Vittorio Malavolti, Riccardo Russo
+  - 13 nascoste (appaiono al click bottone "..."):
+    Stefano Sagliocco, David Pugliese, Francesco Ricciardi, Valentina Lala',
+    Manuela Busatta, Simone Colombo, Maria Gaudino, Alpca 991,
+    Alessandra Falchi, Gloria Arrigoni, Khatia Baidoshvili, Orazio Campisi,
+    Cristian Lamparelli
+- Layout recensioni desktop: griglia orizzontale con scroll + bottone "..." (cerchietto dorato 44px) a destra
+  - Click "..." → fade-out bottone, card extra aggiunte nella griglia orizzontale
+  - Rotellina del mouse convertita in scroll orizzontale sulla griglia
+  - Scrollbar dorata sottile visibile in basso
+  - Nessun salto della vista al click (window.scrollTo ripristina posizione)
+- Catalogo prodotti COMPLETATO: aggiunti Balsamo cheratina (22E) e Lacca (28E)
+  - Foto: assets\Immagini_HD\Prodotti\Balsamo_cheratina.jpg e Lacca_capelli.jpeg
+  - Totale: 14 prodotti con foto e prezzo
+- Sezione recensioni spostata: ora si trova dopo Orari e prima di Contatti
+- Struttura pagina aggiornata: Hero > Negozio (crossfade) > Servizi > Prodotti > Orari > **Recensioni** > Contatti > Social > Footer
+
+AGGIORNAMENTO SESSIONE 2026-04-11:
+- Didascalie prodotti con OVERLAY:
+  - Click sulla card → la descrizione appare come overlay semitrasparente sopra la foto
+    (sfondo rgba(10,26,18,0.92), testo bianco centrato, padding 1.2rem, fadeIn 0.3s)
+  - Click di nuovo → overlay si chiude
+  - Una sola card aperta alla volta (le altre si chiudono automaticamente)
+  - Chevron dorato a destra del prezzo: ruota verso l'alto quando la card e' aperta
+  - Testi forniti dal cliente (file Didascalie_prodotti.txt), convertiti da ALL CAPS a sentence case
+  - Gel rasatura saltato (non presente nel catalogo prodotti del sito)
+  - 14 prodotti con didascalia: Gel capelli, Cera lucida, Polvere volumizzante, Cera opaca,
+    Cera anti-age, Profumo per capelli, Shampoo antigiallo, Shampoo uso frequente,
+    Spray al sale marino, Crema attiva ricci, Olio da barba, Dopobarba, Balsamo cheratina, Lacca
+- FILTRI CATEGORIA prodotti:
+  - Tab "Tutti / Styling / Cura capelli / Barba" sopra la griglia
+  - Stile: bordo dorato, testo oro, tab attivo sfondo dorato con testo scuro
+  - Animazione filtro: fadeOut (opacity 0, scale 0.95) + display:none per prodotti nascosti
+  - Categorie assegnate via data-category:
+    Styling: Gel capelli, Cera lucida, Polvere volumizzante, Cera opaca, Lacca
+    Cura capelli: Shampoo antigiallo, Shampoo uso frequente, Spray al sale marino,
+      Crema attiva ricci, Balsamo cheratina, Profumo per capelli
+    Barba: Olio da barba, Dopobarba, Cera anti-age
+- Card hover migliorato: translateY(-4px), box-shadow 0 8px 32px, bordo dorato sottile
+- Foto prodotti uniformate: aspect-ratio 1/1 (quadrate), object-fit cover, object-position center
+- SEZIONE RECENSIONI ridisegnata completamente:
+  - Carosello manuale (NO autoplay) con frecce sinistra/destra dorate + dots indicatori
+  - 16 recensioni tutte nel carosello (rimosse logica show/hide e bottone "...")
+  - 3 card desktop, 2 tablet, 1 mobile
+  - Touch swipe su mobile (touchstart/touchmove/touchend con threshold 50px)
+  - Header badge: icona Google colorata + counter animato 0.0→5.0 (ease-out 1.5s) +
+    5 stelle che si riempiono in sequenza (delay 180ms tra una e l'altra)
+  - Sotto-testo: "16 recensioni — tutte a 5 stelle"
+  - Card redesign: virgolette decorative "" in oro semitrasparente, avatar con bordo dorato,
+    hover glow verde sull'avatar, "Leggi tutto" per testi lunghi (expand smooth)
+  - Animazioni IntersectionObserver per counter e stelle quando entrano in viewport
+- Fix overlay prodotti mobile: sostituito aspect-ratio 1/1 con inset 0 (top/left/right/bottom: 0),
+  aggiunto overflow-y: auto per scroll su testi lunghi, margin: auto 0 per centratura verticale
+- SEZIONE NEGOZIO migliorata:
+  - Gallery dots: 14 pallini dorati sotto la foto del crossfade, dot attivo si allarga a pill shape
+    Click su dot → vai a quella foto, timer autoplay si resetta dopo ogni interazione
+  - Gradient overlay piu' forte sia desktop che mobile per leggibilita' del testo su tutte le 14 foto
+    Desktop: gradient sinistro piu' opaco (0.94→0.85→0.5→0.2), bottom gradient piu' forte
+    Mobile: gradient sinistro rafforzato (0.78→0.4→0.15), bottom gradient piu' scuro
+- SEZIONE SERVIZI ridisegnata:
+  - 3 gruppi con titoletto oro uppercase: Taglio (5 servizi), Barba (3), Extra (3)
+  - Card redesign: icona SVG a sinistra (forbici/rasoio/stella), bordo sinistro dorato 2px, hover translateY + glow verde
+  - "Taglio + barba" in evidenza: badge "Piu' richiesto" oro, bordo oro completo, sfondo differenziato
+  - CTA finale: "Prenota il tuo appuntamento" + bottone WhatsApp (button-primary)
+  - Animazioni reveal sfalsate per gruppo
+- SEZIONE ORARI ridisegnata:
+  - Status indicator live: dot verde pulsante "Aperto — chiudiamo tra X ore" o dot rosso "Chiuso oggi/ora"
+  - Calcolo automatico basato su orario Roma (Europe/Rome) e orari del negozio
+  - Giorni chiusi (Lunedi'/Domenica) con opacita' ridotta (0.45) per dare risalto ai giorni aperti
+  - Stagger animation: 7 righe entrano in sequenza con slide da sinistra (delay 0.07s incrementale)
+  - Giorno corrente: glow verde piu' marcato + scale(1.01) + ombra verde
+  - Orologio decorativo: cerchio dorato semitrasparente in alto a destra della card (CSS ::before/::after)
+  - Due animazioni separate: rowSlideIn (opacity→1) per giorni aperti, rowSlideInDim (opacity→0.45) per chiusi
+- OTTIMIZZAZIONE PERFORMANCE:
+  - Immagini WebP via build-images.js + sharp:
+    Gallery: 14 foto + hero → assets/optimized/ (max 1600px, qualita' 80, -52% peso)
+    Prodotti: 14 foto → assets/optimized/prodotti/ (max 600px, qualita' 80, -91% peso)
+  - HTML: <picture> con WebP + fallback JPG su tutti i prodotti
+  - width/height espliciti su tutti gli <img> (logo 220x146, prodotti 600x600)
+  - decoding="async" su tutte le immagini lazy
+  - Gallery slides aggiornate a WebP ottimizzati
+  - Google Fonts caricati asincrono (pattern media="print" onload="this.media='all'")
+  - Preconnect per Google Maps aggiunto
+  - JS: tutto wrappato in DOMContentLoaded
+  - Parallax hero con requestAnimationFrame (throttled)
+  - IntersectionObserver reveal con rootMargin: "0px 0px -50px 0px"
+  - Gallery crossfade: setInterval si ferma quando fuori viewport (IntersectionObserver)
+  - JSON-LD BarberShop con dati completi (indirizzo, orari, social, rating 5.0/16 recensioni)
+- MIGLIORAMENTI IMPATTO VISIVO:
+  - Hero: gradient animato lento (heroGlow 20s), CTA shimmer (luce che scorre ogni 5s)
+  - Topbar: glassmorphism on scroll (sticky, backdrop-filter blur 12px dopo 50px scroll)
+  - Gallery Negozio: Ken Burns (zoom 1→1.08 in 4.5s) su slide attiva, dots con glow dorato
+  - Servizi: glassmorphism sulle card (backdrop-filter blur 6px), card "Piu' richiesto" con bordo animato (borderShine), hover light sweep (::before gradient dal basso)
+  - Prodotti: tilt 3D al hover (perspective 600px, rotateY/X, scale 1.03), blur 3px sulla foto sotto overlay, indicatore sottolineatura animata sui filtri (div .filter-indicator con transition left/width)
+  - Orari: ring pulse migliorato (box-shadow che si espande e svanisce, sia verde che rosso)
+  - Recensioni: transizione carousel cubic-bezier(0.25,0.46,0.45,0.94), virgolette con animazione float (3s, 4px)
+  - prefers-reduced-motion: reduce → disabilita tutte le animazioni/transizioni
+- Scroll behavior: rimosso scroll-behavior:smooth dal CSS (scrolling pagina istantaneo)
+  - Smooth scroll mantenuto SOLO per anchor link via JS (scrollIntoView behavior:'smooth')
+  - Aggiunto listener su tutti i link a[href^="#"] dentro DOMContentLoaded
+- FIX dimensioni prodotti:
+  - Card prodotto ridotte: max-width 220px, aspect-ratio 3/4 (verticale compatto)
+  - Griglia convertita da CSS grid a flexbox con justify-content: center
+  - Responsive: 4 col desktop (max 220px), 3 col tablet, 2 col mobile (senza max-width)
+  - Padding product-info ridotto (0.65rem 0.85rem), font h3 ridotto (0.82rem)
+- FIX scroll jank:
+  - will-change: transform + translateZ(0) su .topbar e .hero::before (hardware acceleration)
+  - Parallax disabilitato su mobile (window.innerWidth < 768) per evitare jank
+  - RIMOSSI tutti i backdrop-filter non essenziali (~30 elementi):
+    .panel, .hero-copy, .hours-card, .photo-card, .intro .panel, .price-card, .carousel-arrow
+    Compensati con sfondi piu' opachi (rgba piu' alti)
+    Restano SOLO su: .topbar.is-scrolled (sticky, 1 elem) e .cookie-banner (fixed, temporaneo)
+  - Fix duplicate transform su .hero::before: uniti translateY + translateZ in una sola proprieta'
+  - body background-color: #153d2b separato da background-image (fallback solido)
+  - overscroll-behavior: none su html (no rubber-band scroll)
+- FIX striscia nera in cima durante scroll:
+  - hero::before inset da -20% a -40% per coprire piu' area durante parallax
+  - Rimosso background-color dalla hero (trasparente per mostrare body gradient)
+  - .hero overflow: hidden → overflow: clip (stessa clip visiva ma non rompe sticky topbar,
+    elimina artefatti di rendering ai bordi che causavano la striscia nera)
+- Installati Python 3.12 e Node.js LTS (v24) sul PC per server di sviluppo locale
+  - Python: C:/Users/christian.riga/AppData/Local/Programs/Python/Python312/python.exe
+  - Node.js: C:/Program Files/nodejs/node.exe
+  - Server dev: python -m http.server 8765 --directory [path progetto]
+
+FILE NUOVI AGGIUNTI:
+- build-images.js: script Node.js per ottimizzazione immagini con sharp
+- package.json: dipendenza sharp per build-images.js
+- assets/optimized/*.webp: 15 foto gallery ottimizzate
+- assets/optimized/prodotti/*.webp: 14 foto prodotti ottimizzate
+- node_modules/: dipendenze npm (non includere nel deploy, solo dev)
+
+DA CHIEDERE AL CLIENTE (aggiornato):
+1. **FILE ORIGINALE DEL LOGO** (priorita' alta) — il logo attuale e' sgranato. Serve il file originale PNG HD o SVG dal grafico
+2. Nome del brand / linea prodotti — se i prodotti hanno un marchio proprio
+3. Conferma circuiti POS accettati (Visa, Mastercard, Maestro, altri?)
+
+PROSSIMI SVILUPPI POSSIBILI:
+- PRIORITA': sostituire il logo con versione HD quando il cliente fornisce il file originale
+- Aggiungere/rimuovere loghi pagamento nel footer in base ai circuiti confermati dal cliente
+- Quando il sito sara' pubblicato: aggiornare og:url e og:image con URL assoluti
+- Valutare critical CSS inline nel <head> per migliorare ulteriormente LCP
+
+NOTA SUI META TAG OPEN GRAPH:
+- Il tag og:url e' attualmente vuoto: va compilato con l'URL definitivo quando il sito sara' pubblicato
+- Il tag og:image usa un path relativo (assets/negozio-hero.jpg): quando il sito sara' online, va sostituito con l'URL assoluto dell'immagine
+
+NOTA SUL COOKIE BANNER:
+- Il banner usa localStorage per ricordare la scelta dell'utente
+- Se l'utente rifiuta i cookie, l'iframe di Google Maps viene rimosso dalla pagina
+- Per una soluzione GDPR piu' completa in produzione, valutare l'integrazione di un servizio dedicato (es. Iubenda, Cookiebot)
+
+NOTA SULLA MAPPA GOOGLE MAPS:
+- L'URL attuale usa il formato ?q=...&output=embed che funziona senza API key
+- Per uso professionale in produzione, Google consiglia l'uso della Maps Embed API con API key propria
+- Senza API key, Google potrebbe mostrare watermark o limitare le richieste
+
+SCELTE GRAFICHE GIA' APPROVATE DALL'UTENTE:
+- Stile generale del sito apprezzato
+- Palette verde coerente con negozio e logo
+- Layout elegante, pulito, responsive
+- Logo trasparente nell'header apprezzato
+- Effetto fotografico della sezione "Il negozio" su mobile considerato interessante come direzione
+- Rimozione della scritta "Nuova apertura a Monza" approvata
+- Titoli "I NOSTRI ORARI" e "CONTATTI" in stile coerente con "SOCIAL" approvati
+- Fix del titolo Social con accento e fix dello strabordo mobile della sezione "Il negozio" approvati come correzioni tecniche
+- Sezione recensioni con carosello manuale approvata
+- Sezione prodotti con filtri categoria, overlay didascalia, foto 1:1 e hover migliorato approvata
+- Sezione negozio con gallery dots e gradient rafforzato approvata
+- Sezione servizi con gruppi, icone, badge "Piu' richiesto" e CTA WhatsApp approvata
+- Sezione orari con status live, stagger animation e opacita' giorni chiusi approvata
+- Ottimizzazione performance (WebP, font async, JSON-LD, JS DOMContentLoaded, rAF) approvata
+- Miglioramenti visivi (hero glow, shimmer CTA, topbar glass, Ken Burns, tilt 3D, ring pulse, reduced-motion) approvati
+
+DATI BUSINESS:
+- Nome: A PUTIA DEL BARBEE
+- Indirizzo: Via Sant'Albino 16, 20900, Monza (MB)
+- Telefono/WhatsApp: +39 3933044610
+- Instagram: https://www.instagram.com/aputiadelbarbee/
+- TikTok: https://www.tiktok.com/@aputiadelbarbee
+
+ORARI:
+- Lunedi': chiuso
+- Martedi': 9:00 - 19:00
+- Mercoledi': 9:00 - 19:00
+- Giovedi': 9:00 - 19:00
+- Venerdi': 9:00 - 19:00
+- Sabato: 8:00 - 18:00
+- Domenica: chiuso
+
+NOTE TECNICHE:
+- Python 3.12 installato: C:/Users/christian.riga/AppData/Local/Programs/Python/Python312/python.exe
+- Node.js LTS installato: C:/Program Files/nodejs/node.exe
+- Server dev: python -m http.server 8765 --directory [path progetto]
+- L'estensione Chrome non puo' operare su google.com (dominio protetto)
+- L'estensione Chrome non puo' navigare a localhost (dominio bloccato)
+- Per verificare il sito: avviare server Python + aprire http://localhost:8765 manualmente
+
+SE LA PROSSIMA CHAT DEVE RIPARTIRE VELOCEMENTE:
+1. Aprire index.html, styles.css e script.js
+2. PRIORITA': sostituire il logo con versione HD (il logo attuale e' sgranato)
+3. Controllare se il cliente ha fornito: logo HD, circuiti POS, nomi brand prodotti
+4. Quando il sito sara' pubblicato: aggiornare og:url e og:image con URL assoluti
+5. Sezione recensioni: carosello manuale con 16 card, frecce + dots + swipe, badge animato
+6. Catalogo prodotti: 14 prodotti con foto 1:1, prezzo, overlay didascalia, filtri categoria
+7. Struttura: Hero (glow+shimmer) > Negozio (Ken Burns+dots) > Servizi (glass+animated border) > Prodotti (3D tilt+filtri+overlay blur) > Orari (ring pulse+stagger) > Recensioni (carosello smooth) > Contatti > Social > Footer
+8. Immagini ottimizzate WebP in assets/optimized/ — rieseguire `node build-images.js` se si aggiungono foto
+9. JSON-LD BarberShop presente nel head, prefers-reduced-motion supportata
+7. Struttura: Hero > Negozio > Servizi > Prodotti > Orari > Recensioni > Contatti > Social > Footer

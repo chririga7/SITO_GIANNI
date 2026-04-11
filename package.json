@@ -1,0 +1,10 @@
+{
+  "name": "sito-gianni-build",
+  "private": true,
+  "scripts": {
+    "build:images": "node build-images.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  }
+}
