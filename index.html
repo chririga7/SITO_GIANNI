@@ -587,13 +587,12 @@
           </div>
         </article>
         <article class="panel map-panel reveal reveal-delay-1">
-          <div class="map-frame">
-            <iframe
-              title="Mappa del negozio A PUTÌA DEL BARBÉE"
-              src="https://www.google.com/maps?q=Via+Sant%27Albino+16,+20900+Monza+MB&z=15&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+          <div class="map-frame" id="map-container"
+               data-src="https://www.google.com/maps?q=Via+Sant%27Albino+16,+20900+Monza+MB&z=15&output=embed">
+            <div class="map-placeholder">
+              <p>La mappa viene mostrata dopo aver accettato i cookie.<br>
+              <a href="https://www.google.com/maps?q=Via+Sant%27Albino+16,+20900+Monza+MB" target="_blank" rel="noopener noreferrer">Apri su Google Maps</a></p>
+            </div>
           </div>
         </article>
       </div>
@@ -647,6 +646,7 @@
       <div class="footer-links">
         <a href="privacy.html">Privacy</a>
         <a href="cookies.html">Cookie</a>
+        <a href="#" id="cookie-manage">Gestisci cookie</a>
       </div>
     </div>
   </footer>
@@ -656,12 +656,13 @@
   </a>
 
   <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Informativa cookie" hidden>
-    <p>Questo sito utilizza cookie tecnici e servizi di terze parti (Google Maps). Continuando accetti l'uso dei cookie.
-      <a href="cookies.html">Maggiori info</a>
+    <button id="cookie-close" class="cookie-close" aria-label="Chiudi">&times;</button>
+    <p>Questo sito utilizza cookie tecnici necessari alla navigazione. Utilizza inoltre servizi di terze parti (Google Maps, Google Fonts) che potrebbero installare cookie di profilazione. Chiudendo questo banner o rifiutando, verranno utilizzati solo cookie tecnici.
+      <a href="cookies.html">Informativa completa</a>
     </p>
     <div class="cookie-actions">
-      <button id="cookie-accept" class="button button-primary cookie-btn">Accetta</button>
-      <button id="cookie-reject" class="button button-secondary cookie-btn">Rifiuta</button>
+      <button id="cookie-accept" class="button button-primary cookie-btn">Accetta tutti</button>
+      <button id="cookie-reject" class="button button-secondary cookie-btn">Solo necessari</button>
     </div>
   </div>
 

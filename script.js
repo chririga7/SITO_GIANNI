@@ -405,24 +405,94 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   var banner = document.getElementById("cookie-banner");
   var acceptBtn = document.getElementById("cookie-accept");
   var rejectBtn = document.getElementById("cookie-reject");
+  var closeBtn = document.getElementById("cookie-close");
+  var manageBtn = document.getElementById("cookie-manage");
+  var mapContainer = document.getElementById("map-container");
   if (!banner) return;
 
-  var consent = localStorage.getItem("cookie-consent");
-  if (consent) return;
+  function loadMap() {
+    if (!mapContainer || mapContainer.querySelector("iframe")) return;
+    var src = mapContainer.dataset.src;
+    if (!src) return;
+    var iframe = document.createElement("iframe");
+    iframe.title = "Mappa del negozio A PUT\u00ccA DEL BARB\u00c9E";
+    iframe.src = src;
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+    var placeholder = mapContainer.querySelector(".map-placeholder");
+    if (placeholder) placeholder.remove();
+    mapContainer.appendChild(iframe);
+  }
 
-  banner.hidden = false;
+  function hideBanner() {
+    banner.hidden = true;
+  }
+
+  function reject() {
+    localStorage.setItem("cookie-consent", "rejected");
+    hideBanner();
+  }
+
+  /* Scadenza 6 mesi (linee guida Garante) */
+  var SIX_MONTHS = 180 * 24 * 60 * 60 * 1000;
+  var consentTime = localStorage.getItem("cookie-consent-time");
+  var consent = localStorage.getItem("cookie-consent");
+
+  if (consent && consentTime && (Date.now() - Number(consentTime)) > SIX_MONTHS) {
+    localStorage.removeItem("cookie-consent");
+    localStorage.removeItem("cookie-consent-time");
+    consent = null;
+  }
+
+  /* Applica scelta precedente al caricamento */
+  if (consent === "accepted") {
+    loadMap();
+  }
+  /* Se rejected o nessuna scelta: la mappa NON si carica */
+
+  if (!consent) {
+    banner.hidden = false;
+  }
+
+  function saveTime() {
+    localStorage.setItem("cookie-consent-time", String(Date.now()));
+  }
 
   acceptBtn.addEventListener("click", function () {
     localStorage.setItem("cookie-consent", "accepted");
-    banner.hidden = true;
+    saveTime();
+    hideBanner();
+    loadMap();
   });
 
   rejectBtn.addEventListener("click", function () {
-    localStorage.setItem("cookie-consent", "rejected");
-    banner.hidden = true;
-    var iframe = document.querySelector(".map-frame iframe");
-    if (iframe) iframe.remove();
+    reject();
+    saveTime();
   });
+
+  /* X chiude il banner = rifiuto (solo cookie tecnici, come da linee guida Garante) */
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () { reject(); saveTime(); });
+  }
+
+  /* Link "Gestisci cookie" nel footer riapre il banner */
+  if (manageBtn) {
+    manageBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem("cookie-consent");
+      /* Rimuovi mappa se presente */
+      var iframe = mapContainer && mapContainer.querySelector("iframe");
+      if (iframe) {
+        iframe.remove();
+        var ph = document.createElement("div");
+        ph.className = "map-placeholder";
+        ph.innerHTML = '<p>La mappa viene mostrata dopo aver accettato i cookie.<br><a href="https://www.google.com/maps?q=Via+Sant%27Albino+16,+20900+Monza+MB" target="_blank" rel="noopener noreferrer">Apri su Google Maps</a></p>';
+        mapContainer.appendChild(ph);
+      }
+      banner.hidden = false;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+  }
 })();
 
 }); /* end DOMContentLoaded */

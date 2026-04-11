@@ -316,10 +316,17 @@ NOTA SUI META TAG OPEN GRAPH:
 - Il tag og:url e' attualmente vuoto: va compilato con l'URL definitivo quando il sito sara' pubblicato
 - Il tag og:image usa un path relativo (assets/negozio-hero.jpg): quando il sito sara' online, va sostituito con l'URL assoluto dell'immagine
 
-NOTA SUL COOKIE BANNER:
-- Il banner usa localStorage per ricordare la scelta dell'utente
-- Se l'utente rifiuta i cookie, l'iframe di Google Maps viene rimosso dalla pagina
-- Per una soluzione GDPR piu' completa in produzione, valutare l'integrazione di un servizio dedicato (es. Iubenda, Cookiebot)
+NOTA SUL COOKIE BANNER (conforme Garante Privacy - Provvedimento 10 giugno 2021):
+- Google Maps bloccato di default: l'iframe NON si carica fino al consenso esplicito dell'utente
+  Se rifiuta, viene mostrato un placeholder con link diretto a Google Maps
+- Banner con 3 opzioni: "Accetta tutti" / "Solo necessari" / X (chiudi = rifiuto, come da linee guida)
+- Testo banner specifica: cookie tecnici + servizi terze parti (Google Maps, Google Fonts)
+- Scadenza 6 mesi: il consenso viene salvato con timestamp in localStorage,
+  dopo 180 giorni il banner viene riproposto automaticamente
+- Link "Gestisci cookie" nel footer per modificare la scelta in qualsiasi momento
+- cookies.html aggiornata con: pulsante X documentato, link "Gestisci cookie" menzionato,
+  blocco preventivo mappa documentato, riferimenti normativi completi
+- Conformita' verificata contro FAQ Garante Privacy (garanteprivacy.it/faq/cookie)
 
 NOTA SULLA MAPPA GOOGLE MAPS:
 - L'URL attuale usa il formato ?q=...&output=embed che funziona senza API key

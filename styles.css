@@ -1572,6 +1572,42 @@ h3 {
   }
 }
 
+.cookie-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cookie-close:hover {
+  color: var(--text);
+}
+
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 360px;
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.map-placeholder a {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
 .cookie-banner {
   position: fixed;
   bottom: 0;
@@ -1582,7 +1618,7 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 1.2rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2.5rem 1rem 1.5rem;
   background: rgba(7, 16, 13, 0.96);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--line);
