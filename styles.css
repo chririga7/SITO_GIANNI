@@ -899,7 +899,7 @@ h3 {
 .products-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.9rem;
+  gap: 0.75rem;
   justify-content: center;
 }
 
@@ -910,8 +910,7 @@ h3 {
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  max-width: 220px;
-  width: calc(25% - 0.9rem);
+  flex: 0 0 120px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
 }
 
@@ -936,7 +935,7 @@ h3 {
 
 .product-img img {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
   transition: transform 0.4s ease;
@@ -950,20 +949,20 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.65rem 0.85rem;
+  gap: 0.4rem;
+  padding: 0.45rem 0.65rem;
 }
 
 .product-info h3 {
   margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.3;
+  font-size: 0.72rem;
+  line-height: 1.25;
 }
 
 .product-price {
   flex-shrink: 0;
   font-family: "Oswald", sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--gold);
   letter-spacing: 0.02em;
@@ -972,10 +971,10 @@ h3 {
 .product-info::after {
   content: "";
   display: inline-block;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-right: 2px solid var(--gold);
-  border-bottom: 2px solid var(--gold);
+  width: 0.35rem;
+  height: 0.35rem;
+  border-right: 1.5px solid var(--gold);
+  border-bottom: 1.5px solid var(--gold);
   transform: rotate(45deg);
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.4;
@@ -1216,12 +1215,46 @@ h3 {
 
 .social-card {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  transition: transform 180ms ease, border-color 180ms ease;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
 }
 
-.social-card:hover,
+.social-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  opacity: 0.2;
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+.social-card--ig::before {
+  background: linear-gradient(180deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+.social-card--tk::before {
+  background: linear-gradient(180deg, #25f4ee, #fe2c55);
+}
+
+.social-card:hover::before {
+  opacity: 0.4;
+  width: 4px;
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(216, 193, 143, 0.4);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
 .photo-card:hover {
   border-color: rgba(216, 193, 143, 0.45);
 }
@@ -1230,14 +1263,57 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: currentColor;
+}
+
+.social-card:hover .social-icon {
+  background: rgba(92, 174, 127, 0.2);
+  transform: scale(1.08);
 }
 
 .social-name {
-  margin-bottom: 0.25rem;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.social-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.social-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  color: var(--gold);
+  font-family: "Oswald", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.social-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.social-card:hover .social-arrow {
+  transform: translateX(4px);
 }
 
 .contact-title {
@@ -1397,7 +1473,7 @@ h3 {
   }
 
   .product-card {
-    width: calc(33.33% - 0.9rem);
+    flex: 0 0 calc(25% - 0.75rem);
   }
 
   h1,
@@ -1513,9 +1589,9 @@ h3 {
   .carousel-arrow { width: 36px; height: 36px; }
 
   .product-card {
-    width: calc(50% - 0.9rem);
-    max-width: none;
+    flex: 0 0 calc(33.33% - 0.75rem);
   }
+
 
 
   .section {
@@ -1752,10 +1828,6 @@ h3 {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22), 0 0 20px rgba(92, 174, 127, 0.08);
 }
 
-.social-card:hover .social-icon {
-  background: rgba(92, 174, 127, 0.2);
-  transition: background 220ms ease;
-}
 
 .button-primary:hover {
   box-shadow: 0 16px 42px rgba(92, 174, 127, 0.45);

@@ -294,6 +294,21 @@ AGGIORNAMENTO SESSIONE 2026-04-11:
   - Node.js: C:/Program Files/nodejs/node.exe
   - Server dev: python -m http.server 8765 --directory [path progetto]
 
+- Card prodotti: ridotte a flex 0 0 120px, aspect-ratio 1/1 (quadrato), barra info compatta
+  (padding 0.45rem 0.65rem, font h3 0.72rem, prezzo 1.05rem, chevron 0.35rem)
+  NOTA: il cliente ha richiesto card ancora piu' piccole ma la modifica non ha avuto
+  l'effetto desiderato nel browser — da investigare (possibile cache o conflitto CSS)
+- Sezione Social ridisegnata:
+  - Card verticali centrate con icona grande (40px), nome bold, descrizione, CTA "Seguici →"
+  - Gradient accento Instagram (viola/arancio/rosa) e TikTok (azzurro/rosa) su bordo sinistro
+  - Hover: gradient piu' visibile, card lift, freccia animata
+- Cookie banner GDPR conforme (Garante Privacy, Provvedimento 10 giugno 2021):
+  - Google Maps bloccato di default, caricato solo dopo "Accetta tutti"
+  - Pulsante X = rifiuto (solo cookie tecnici)
+  - Scadenza 6 mesi con timestamp, banner riproposto automaticamente
+  - Link "Gestisci cookie" nel footer per modificare la scelta
+  - cookies.html aggiornata con documentazione completa
+
 FILE NUOVI AGGIUNTI:
 - build-images.js: script Node.js per ottimizzazione immagini con sharp
 - package.json: dipendenza sharp per build-images.js
