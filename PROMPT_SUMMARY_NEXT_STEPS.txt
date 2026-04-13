@@ -356,7 +356,17 @@ DA CHIEDERE AL CLIENTE (aggiornato):
 
 PROSSIMI SVILUPPI POSSIBILI:
 - PRIORITA': sostituire il logo con versione HD quando il cliente fornisce il file originale
-- Quando il sito sara' pubblicato: aggiornare og:url e og:image con URL assoluti
+- PUBBLICAZIONE SITO — 3 step pianificati:
+  1. ACQUISTO DOMINIO (cliente): il cliente ha gia' account Aruba, deve acquistare il dominio
+     (es. aputiadelbarbee.it). Solo dominio, senza hosting.
+     DA CHIEDERE: quale nome dominio vuole?
+  2. REGISTRAZIONE NETLIFY (noi): collegare repo GitHub (chririga7/SITO_GIANNI) a Netlify,
+     deploy automatico da main, collegare DNS Aruba → Netlify, HTTPS automatico con Let's Encrypt
+  3. PREPARAZIONE DEPLOY (noi): aggiornare og:url e og:image con URL assoluti,
+     aggiornare url nel JSON-LD, escludere node_modules dal deploy,
+     verifica finale desktop+mobile, opzionale QR code e Google Search Console
+  - Riferimento: stessa procedura usata per il sito di Alessandro Cambiaghi
+    (Aruba dominio + Netlify hosting, vedi Sito_Ale/contesto_sito_ale_prompt_copilot.txt)
 - Valutare critical CSS inline nel <head> per migliorare ulteriormente LCP
 
 NOTA SUI META TAG OPEN GRAPH:
