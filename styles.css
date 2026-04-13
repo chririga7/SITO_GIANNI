@@ -74,20 +74,6 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 0 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease;
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-.topbar.is-scrolled {
-  background: rgba(7, 21, 18, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--line);
 }
 
 .brand {
@@ -851,112 +837,90 @@ h3 {
 
 
 
-/* --- Prodotti --- */
-.product-filters {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+/* --- Prodotti (vetrina a fasce) --- */
+.product-shelf {
+  margin-bottom: 2rem;
 }
 
-.filter-indicator {
-  position: absolute;
-  bottom: -2px;
-  height: 2px;
-  background: var(--gold);
-  border-radius: 2px;
-  transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-.filter-tab {
-  padding: 0.5rem 1.2rem;
-  border: 1px solid rgba(216, 193, 143, 0.35);
-  border-radius: 999px;
-  background: transparent;
+.shelf-title {
   color: var(--gold);
   font-family: "Oswald", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  margin: 0 0 0.75rem;
 }
 
-.filter-tab:hover {
-  border-color: var(--gold);
-  background: rgba(216, 193, 143, 0.1);
-}
-
-.filter-tab.is-active {
-  background: var(--gold);
-  color: var(--bg);
-  border-color: var(--gold);
-}
-
-.products-grid {
+.shelf-track {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+
+.shelf-track::-webkit-scrollbar {
+  display: none;
 }
 
 .product-card {
   position: relative;
   padding: 0;
   overflow: hidden;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
-  flex: 0 0 120px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  flex: 0 0 150px;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border-color: rgba(193, 163, 98, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  border-color: rgba(193, 163, 98, 0.25);
 }
 
-.product-card.is-hidden {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-  position: absolute;
-  visibility: hidden;
-}
-
+/* Photo */
 .product-img {
   position: relative;
   overflow: hidden;
+  border-radius: 12px 12px 0 0;
 }
 
 .product-img img {
   width: 100%;
+  height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
+  display: block;
   transition: transform 0.4s ease;
 }
 
 .product-card:hover .product-img img {
-  transform: perspective(600px) rotateY(3deg) rotateX(-2deg) scale(1.03);
+  transform: scale(1.06);
 }
 
+/* Name + price bar */
 .product-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
-  padding: 0.45rem 0.65rem;
+  padding: 0.55rem 0.7rem;
 }
 
 .product-info h3 {
   margin: 0;
-  font-size: 0.72rem;
-  line-height: 1.25;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  flex: 1;
+  min-width: 0;
 }
 
 .product-price {
@@ -968,6 +932,7 @@ h3 {
   letter-spacing: 0.02em;
 }
 
+/* Chevron */
 .product-info::after {
   content: "";
   display: inline-block;
@@ -977,9 +942,9 @@ h3 {
   border-bottom: 1.5px solid var(--gold);
   transform: rotate(45deg);
   transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0.4;
+  opacity: 0.35;
   flex-shrink: 0;
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
 }
 
 .product-card.is-open .product-info::after {
@@ -987,29 +952,21 @@ h3 {
   opacity: 0.85;
 }
 
-/* Product description overlay */
+/* Description overlay */
 .product-desc {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 1rem;
   background: rgba(10, 26, 18, 0.92);
+  border-radius: 12px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 1;
   overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.product-card.is-open .product-img img {
-  filter: blur(3px);
-  transition: filter 0.3s ease, transform 0.4s ease;
 }
 
 .product-card.is-open .product-desc {
@@ -1017,11 +974,16 @@ h3 {
   pointer-events: auto;
 }
 
+.product-card.is-open .product-img img {
+  filter: blur(3px);
+  transition: filter 0.3s ease, transform 0.4s ease;
+}
+
 .product-desc p {
-  margin: auto 0;
+  margin: 0;
   color: #fff;
-  font-size: 0.87rem;
-  line-height: 1.65;
+  font-size: 0.8rem;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -1242,6 +1204,10 @@ h3 {
 
 .social-card--tk::before {
   background: linear-gradient(180deg, #25f4ee, #fe2c55);
+}
+
+.social-card--fb::before {
+  background: linear-gradient(180deg, #1877f2, #0a5dc2);
 }
 
 .social-card:hover::before {
@@ -1472,9 +1438,6 @@ h3 {
     flex: 0 0 calc((100% - 0.9rem) / 2);
   }
 
-  .product-card {
-    flex: 0 0 calc(25% - 0.75rem);
-  }
 
   h1,
   h2 {
@@ -1587,11 +1550,6 @@ h3 {
   .carousel-prev { left: 0.25rem; }
   .carousel-next { right: 0.25rem; }
   .carousel-arrow { width: 36px; height: 36px; }
-
-  .product-card {
-    flex: 0 0 calc(33.33% - 0.75rem);
-  }
-
 
 
   .section {
@@ -1834,14 +1792,10 @@ h3 {
 }
 
 /* --- Parallax hero --- */
-.hero {
-  overflow: clip;
-}
-
 .hero::before {
   content: "";
   position: absolute;
-  inset: -40% 0 0 0;
+  inset: 0;
   background:
     radial-gradient(ellipse at 30% 20%, rgba(92, 174, 127, 0.15), transparent 50%),
     radial-gradient(ellipse at 70% 80%, rgba(47, 122, 85, 0.1), transparent 50%);

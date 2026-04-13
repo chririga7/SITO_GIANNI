@@ -275,67 +275,16 @@ highlightTodayHours();
   });
 })();
 
-/* --- Product filters & overlay --- */
+/* --- Product overlay toggle --- */
 (function initProducts() {
   var cards = document.querySelectorAll(".product-card");
-  var tabs = document.querySelectorAll(".filter-tab");
   if (!cards.length) return;
-
-  /* Filter indicator */
-  var filtersWrap = document.querySelector(".product-filters");
-  var indicator = null;
-  if (filtersWrap && tabs.length) {
-    indicator = document.createElement("div");
-    indicator.className = "filter-indicator";
-    filtersWrap.appendChild(indicator);
-    moveIndicator(tabs[0]);
-  }
-
-  function moveIndicator(tab) {
-    if (!indicator) return;
-    indicator.style.left = tab.offsetLeft + "px";
-    indicator.style.width = tab.offsetWidth + "px";
-  }
-
-  /* Overlay toggle */
   cards.forEach(function (card) {
     card.addEventListener("click", function () {
       var wasOpen = card.classList.contains("is-open");
       cards.forEach(function (c) { c.classList.remove("is-open"); });
       if (!wasOpen) card.classList.add("is-open");
     });
-  });
-
-  /* Category filter */
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      tabs.forEach(function (t) { t.classList.remove("is-active"); });
-      tab.classList.add("is-active");
-      moveIndicator(tab);
-      var filter = tab.dataset.filter;
-      cards.forEach(function (c) { c.classList.remove("is-open"); });
-
-      cards.forEach(function (card) {
-        if (filter === "tutti" || card.dataset.category === filter) {
-          card.style.display = "";
-          requestAnimationFrame(function () {
-            card.classList.remove("is-hidden");
-          });
-        } else {
-          card.classList.add("is-hidden");
-          setTimeout(function () {
-            if (card.classList.contains("is-hidden")) {
-              card.style.display = "none";
-            }
-          }, 300);
-        }
-      });
-    });
-  });
-
-  window.addEventListener("resize", function () {
-    var active = document.querySelector(".filter-tab.is-active");
-    if (active) moveIndicator(active);
   });
 })();
 
@@ -376,19 +325,6 @@ highlightTodayHours();
   }, { passive: true });
 })();
 
-/* --- Topbar glassmorphism on scroll --- */
-(function initTopbarScroll() {
-  var topbar = document.querySelector(".topbar");
-  if (!topbar) return;
-  var scrolled = false;
-  window.addEventListener("scroll", function () {
-    var s = window.scrollY > 50;
-    if (s !== scrolled) {
-      scrolled = s;
-      topbar.classList.toggle("is-scrolled", s);
-    }
-  }, { passive: true });
-})();
 
 /* --- Smooth scroll solo per anchor link --- */
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {

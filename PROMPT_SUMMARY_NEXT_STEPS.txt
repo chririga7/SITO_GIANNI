@@ -48,7 +48,7 @@ STATO ATTUALE DEL SITO:
 - Indirizzo aggiornato in: Via Sant'Albino 16, 20900, Monza (MB)
 - Sezione contatti con mini mappa Google Maps ancora presente
 - Bottone "Apri su Google Maps" rimosso dai contatti
-- Sezione social con Instagram e TikTok presente
+- Sezione social con Instagram, TikTok e Facebook presente
 - Footer con link Privacy e Cookie
 
 MIGLIORAMENTI APPLICATI (sessione Claude Code 2026-03-25):
@@ -150,7 +150,7 @@ AGGIORNAMENTO SESSIONE 2026-04-08:
   - Loghi SVG ufficiali: Visa (con sfondo blu), Mastercard (solo cerchi, no sfondo), Maestro (solo cerchi, no sfondo), Satispay (logo S rossa ufficiale)
   - Stile coerente col tema scuro: Mastercard/Maestro/Satispay senza sfondo, Visa con sfondo blu scuro
   - I contanti non sono stati inclusi (nessun logo standard riconoscibile)
-  - Quando il cliente confermera' i circuiti accettati dal POS, aggiornare i loghi di conseguenza
+  - Circuiti POS confermati dal cliente (sessione 2026-04-13): Visa, Mastercard, Maestro, Satispay — loghi ok
 
 PROBLEMA LOGO:
 - Il logo attuale (assets\Logo-transparent.png) e' sgranato / bassa risoluzione
@@ -161,7 +161,7 @@ DA CHIEDERE AL CLIENTE:
 1. **FILE ORIGINALE DEL LOGO** (priorita' alta) — il logo attuale e' sgranato. Serve il file originale PNG HD o SVG dal grafico
 2. Nome del brand / linea prodotti — se i prodotti hanno un marchio proprio
 3. ~~Descrizioni prodotto~~ — COMPLETATO (sessione 2026-04-11, didascalie integrate con expand/collapse)
-4. Conferma circuiti POS accettati (Visa, Mastercard, Maestro, altri?)
+4. ~~Conferma circuiti POS accettati~~ — CONFERMATI (sessione 2026-04-13): Visa, Mastercard, Maestro, Satispay ok
 
 - Aggiunta sezione RECENSIONI:
   - Intestazione "5.0 ★★★★★ su Google"
@@ -316,14 +316,46 @@ FILE NUOVI AGGIUNTI:
 - assets/optimized/prodotti/*.webp: 14 foto prodotti ottimizzate
 - node_modules/: dipendenze npm (non includere nel deploy, solo dev)
 
+AGGIORNAMENTO SESSIONE 2026-04-13:
+- Circuiti POS confermati dal cliente: Visa, Mastercard, Maestro, Satispay vanno bene come sono
+- SEZIONE PRODOTTI ridisegnata completamente — VETRINA A FASCE ORIZZONTALI:
+  - Ricerca best practice online: Baymard Institute, Material Design 3, siti barbershop reali
+  - Layout "scaffale": 3 fasce orizzontali raggruppate per categoria
+  - Fasce: STYLING (5 prodotti), CURA CAPELLI (6 prodotti), BARBA (3 prodotti)
+  - Titolo categoria: oro, Oswald, 0.82rem, uppercase, letter-spacing 0.14em
+    (stile identico ai sottotitoli servizi: TAGLIO, BARBA, EXTRA)
+  - Shelf-track: flex orizzontale con overflow-x auto, scroll-snap, scrollbar nascosta
+  - Card 150px fisse, foto 1:1 (quadrata), border-radius 12px
+  - Info bar: nome (0.78rem) + prezzo oro (1.05rem Oswald) + chevron
+  - Overlay descrizione: click sulla card → sfondo scuro (rgba 0.92) con border-radius 12px
+    Testo bianco centrato. Click di nuovo → si chiude. Una sola card aperta alla volta
+  - Hover: translateY(-3px), box-shadow, scale foto 1.06
+  - RIMOSSI filtri tab (Tutti/Styling/Cura capelli/Barba) — non servono piu'
+  - RIMOSSO JS filtri e filter-indicator — JS semplificato a solo toggle overlay
+  - RIMOSSO CSS: .product-filters, .filter-tab, .filter-indicator, .products-grid
+  - Swipe nativo su mobile (overflow-x auto + -webkit-overflow-scrolling touch)
+  - Testato desktop e mobile: tutto ok
+- SEZIONE SOCIAL aggiornata:
+  - Aggiunta card Facebook con icona SVG ufficiale e gradient blu (#1877F2 → #0A5DC2)
+  - Link: https://www.facebook.com/people/A-Put%C3%ACa-Del-Barb%C3%A9e/pfbid0LS2wuSdwcT4YSDB2KF1Vsyf9fJbGTvExp16J9CknpZDdZCLmJPcFGznbyq3RD2Zyl/
+  - Facebook aggiunto anche al JSON-LD (sameAs)
+  - Rimosse le descrizioni sotto i nomi social (Instagram, TikTok, Facebook) — restano solo icona + nome + "Seguici →"
+  - 3 card social totali: Instagram, TikTok, Facebook
+- TOPBAR STICKY RIMOSSA:
+  - La topbar non e' piu' sticky (position: sticky rimosso)
+  - Logo e bottone "Prenota ora" scorrono via con il resto della pagina
+  - Rimosso backdrop-filter blur (causava un box nero visibile allo scroll)
+  - Rimosso JS initTopbarScroll (non serve piu' la classe is-scrolled)
+  - Rimosso overflow:clip dalla .hero (causava artefatti visivi con la topbar sticky)
+  - Ridotto inset del .hero::before da -40% a 0 (il glow non stripa piu')
+
 DA CHIEDERE AL CLIENTE (aggiornato):
 1. **FILE ORIGINALE DEL LOGO** (priorita' alta) — il logo attuale e' sgranato. Serve il file originale PNG HD o SVG dal grafico
 2. Nome del brand / linea prodotti — se i prodotti hanno un marchio proprio
-3. Conferma circuiti POS accettati (Visa, Mastercard, Maestro, altri?)
+3. ~~Conferma circuiti POS accettati~~ — CONFERMATI (sessione 2026-04-13): Visa, Mastercard, Maestro, Satispay ok
 
 PROSSIMI SVILUPPI POSSIBILI:
 - PRIORITA': sostituire il logo con versione HD quando il cliente fornisce il file originale
-- Aggiungere/rimuovere loghi pagamento nel footer in base ai circuiti confermati dal cliente
 - Quando il sito sara' pubblicato: aggiornare og:url e og:image con URL assoluti
 - Valutare critical CSS inline nel <head> per migliorare ulteriormente LCP
 
@@ -358,12 +390,13 @@ SCELTE GRAFICHE GIA' APPROVATE DALL'UTENTE:
 - Titoli "I NOSTRI ORARI" e "CONTATTI" in stile coerente con "SOCIAL" approvati
 - Fix del titolo Social con accento e fix dello strabordo mobile della sezione "Il negozio" approvati come correzioni tecniche
 - Sezione recensioni con carosello manuale approvata
-- Sezione prodotti con filtri categoria, overlay didascalia, foto 1:1 e hover migliorato approvata
+- Sezione prodotti ridisegnata: vetrina a fasce orizzontali (Styling/Cura/Barba), card 150px, scroll orizzontale — approvata
 - Sezione negozio con gallery dots e gradient rafforzato approvata
 - Sezione servizi con gruppi, icone, badge "Piu' richiesto" e CTA WhatsApp approvata
 - Sezione orari con status live, stagger animation e opacita' giorni chiusi approvata
 - Ottimizzazione performance (WebP, font async, JSON-LD, JS DOMContentLoaded, rAF) approvata
-- Miglioramenti visivi (hero glow, shimmer CTA, topbar glass, Ken Burns, tilt 3D, ring pulse, reduced-motion) approvati
+- Miglioramenti visivi (hero glow, shimmer CTA, Ken Burns, ring pulse, reduced-motion) approvati
+- Topbar sticky rimossa (causava box nero e sovrapposizione allo scroll) — approvata
 
 DATI BUSINESS:
 - Nome: A PUTIA DEL BARBEE
@@ -371,6 +404,7 @@ DATI BUSINESS:
 - Telefono/WhatsApp: +39 3933044610
 - Instagram: https://www.instagram.com/aputiadelbarbee/
 - TikTok: https://www.tiktok.com/@aputiadelbarbee
+- Facebook: https://www.facebook.com/people/A-Put%C3%ACa-Del-Barb%C3%A9e/pfbid0LS2wuSdwcT4YSDB2KF1Vsyf9fJbGTvExp16J9CknpZDdZCLmJPcFGznbyq3RD2Zyl/
 
 ORARI:
 - Lunedi': chiuso
@@ -392,11 +426,13 @@ NOTE TECNICHE:
 SE LA PROSSIMA CHAT DEVE RIPARTIRE VELOCEMENTE:
 1. Aprire index.html, styles.css e script.js
 2. PRIORITA': sostituire il logo con versione HD (il logo attuale e' sgranato)
-3. Controllare se il cliente ha fornito: logo HD, circuiti POS, nomi brand prodotti
-4. Quando il sito sara' pubblicato: aggiornare og:url e og:image con URL assoluti
-5. Sezione recensioni: carosello manuale con 16 card, frecce + dots + swipe, badge animato
-6. Catalogo prodotti: 14 prodotti con foto 1:1, prezzo, overlay didascalia, filtri categoria
-7. Struttura: Hero (glow+shimmer) > Negozio (Ken Burns+dots) > Servizi (glass+animated border) > Prodotti (3D tilt+filtri+overlay blur) > Orari (ring pulse+stagger) > Recensioni (carosello smooth) > Contatti > Social > Footer
-8. Immagini ottimizzate WebP in assets/optimized/ — rieseguire `node build-images.js` se si aggiungono foto
-9. JSON-LD BarberShop presente nel head, prefers-reduced-motion supportata
-7. Struttura: Hero > Negozio > Servizi > Prodotti > Orari > Recensioni > Contatti > Social > Footer
+3. Controllare se il cliente ha fornito: logo HD, nomi brand prodotti
+4. Circuiti POS: CONFERMATI (Visa, Mastercard, Maestro, Satispay) — loghi gia' nel footer
+5. Quando il sito sara' pubblicato: aggiornare og:url e og:image con URL assoluti
+6. Sezione recensioni: carosello manuale con 16 card, frecce + dots + swipe, badge animato
+7. Catalogo prodotti: 14 prodotti in 3 fasce orizzontali (Styling 5 / Cura 6 / Barba 3), card 150px con scroll, overlay didascalia al click, no filtri tab
+8. Topbar NON piu' sticky — scorre via con la pagina (rimosso per bug box nero)
+9. Struttura: Hero (glow+shimmer) > Negozio (Ken Burns+dots) > Servizi (animated border) > Prodotti (card 4:5+filtri+overlay) > Orari (ring pulse+stagger) > Recensioni (carosello smooth) > Contatti > Social > Footer
+9. Immagini ottimizzate WebP in assets/optimized/ — rieseguire `node build-images.js` se si aggiungono foto
+10. JSON-LD BarberShop presente nel head, prefers-reduced-motion supportata
+11. Preview dev: .claude/launch.json configurato con Python http.server sulla porta 8765
