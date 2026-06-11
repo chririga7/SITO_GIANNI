@@ -1,2 +1,7 @@
 node_modules/
 .claude/
+.chrome-headless/
+.edge-headless/
+assets/Screenshot_*
+assets/Didascalie_prodotti.txt
+assets/Immagini_HD/Negozio/
