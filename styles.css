@@ -558,6 +558,9 @@ h3 {
 .price-icon {
   flex-shrink: 0;
   color: var(--gold);
+  /* slot fisso: icone singole e doppie occupano la stessa larghezza, testi allineati */
+  width: 61px;
+  height: 28px;
 }
 
 .price-name {
@@ -606,24 +609,28 @@ h3 {
 
 /* --- Recensioni --- */
 .reviews-badge {
-  display: inline-flex;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.65rem 1.2rem;
-  border-radius: 999px;
+  gap: 0.45rem;
+  padding: 1.3rem 2.6rem 1.1rem;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--line);
+  text-align: center;
 }
 
 .google-icon { flex-shrink: 0; }
 
 .reviews-counter {
   font-family: "Oswald", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   font-weight: 600;
   color: var(--gold);
   letter-spacing: 0.02em;
   min-width: 2.2ch;
+  line-height: 1.1;
 }
 
 .reviews-stars-row {
@@ -633,7 +640,7 @@ h3 {
 
 .review-star {
   color: rgba(216, 193, 143, 0.2);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   transition: color 0.4s ease;
 }
 
@@ -652,13 +659,16 @@ h3 {
   font-size: 0.85rem;
   opacity: 0.7;
   letter-spacing: 0.05em;
+  justify-self: center;
+  text-align: center;
 }
 
 /* --- Carousel --- */
 .carousel {
   position: relative;
   overflow: hidden;
-  padding: 0 0 2.5rem;
+  /* gutter laterale: le frecce vivono qui, senza coprire le card */
+  padding: 0 3.2rem 2.5rem;
 }
 
 .carousel-track {
@@ -791,8 +801,8 @@ h3 {
   z-index: 2;
 }
 
-.carousel-prev { left: -0.5rem; }
-.carousel-next { right: -0.5rem; }
+.carousel-prev { left: 0.3rem; }
+.carousel-next { right: 0.3rem; }
 
 .carousel-arrow:hover {
   background: rgba(47, 122, 85, 0.25);
@@ -978,6 +988,24 @@ h3 {
 .product-card.is-open .product-img img {
   filter: blur(3px);
   transition: filter 0.3s ease, transform 0.4s ease;
+}
+
+/* Su desktop (mouse) la descrizione appare anche al passaggio del cursore */
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .product-desc {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .product-card:hover .product-img img {
+    filter: blur(3px);
+    transition: filter 0.3s ease, transform 0.4s ease;
+  }
+
+  .product-card:hover .product-info::after {
+    transform: rotate(-135deg);
+    opacity: 0.85;
+  }
 }
 
 .product-desc p {
@@ -1548,8 +1576,9 @@ h3 {
     flex: 0 0 100%;
   }
 
-  .carousel-prev { left: 0.25rem; }
-  .carousel-next { right: 0.25rem; }
+  .carousel { padding: 0 2.6rem 2.5rem; }
+  .carousel-prev { left: 0.15rem; }
+  .carousel-next { right: 0.15rem; }
   .carousel-arrow { width: 36px; height: 36px; }
 
 
